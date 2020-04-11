@@ -6,7 +6,6 @@
         <Codepen :pen="node" />
       </li>
     </ul>
-
   </Layout>
 </template>
 
