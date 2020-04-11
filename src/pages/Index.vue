@@ -84,6 +84,8 @@ export default {
     this.threeInit();
     this.loadFont();
     this.createParticles();
+    this.resize();
+    
   },
   methods: {
     threeInit() {
@@ -111,7 +113,7 @@ export default {
           1000
         );
         
-        this.camera.position.set(0, 0, 2);
+        this.camera.position.set(0, 0, 3);
 
         this.setupResize();
 
@@ -119,10 +121,11 @@ export default {
       }
     },
     resize() {
-      this.width = this.container.offsetWidth;
-      this.height = this.container.offsetHeight;
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
       this.renderer.setSize(this.width, this.height);
       this.camera.aspect = this.width / this.height;
+      console.log(this.width, this.height)
       
       // image cover
       this.imageAspect = 1;
@@ -136,23 +139,11 @@ export default {
         a2 = (this.height / this.width) * this.imageAspect;
       }
       
-      this.material.uniforms.iResolution.value.x = this.width;
-      this.material.uniforms.iResolution.value.y = this.height;
-      this.material.uniforms.iResolution.value.z = a1;
-      this.material.uniforms.iResolution.value.w = a2;
-
-
-      
       const dist = this.camera.position.z;
       const height = 1;
       
-      this.camera.fov = 2 * (180 / Math.PI) * Math.atan(height / (2 * dist));
-      
-      if (this.width / this.height > 1) {
-        this.plane.scale.x = this.camera.aspect;
-      } else {
-        this.plane.scale.y = 1 / this.camera.aspect;
-      }
+      this.camera.fov = 4 * (180 / Math.PI) * Math.atan(height / (2 * dist));
+      console.log(this.camera.fov)
 
       this.camera.updateProjectionMatrix();
     },
