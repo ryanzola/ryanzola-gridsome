@@ -69,8 +69,8 @@ export default {
       scene: null,
       renderer: null,
       camera: null,
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: null,
+      height: null,
       container: null,
       instances: 50000,
       vertexShader: null,
@@ -88,6 +88,8 @@ export default {
   methods: {
     threeInit() {
       if(!!document) {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer()
         this.vertexShader = document.getElementById('vertex').textContent;
