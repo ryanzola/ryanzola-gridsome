@@ -61,13 +61,13 @@
 
 
 <script>
-import * as THREE from 'three'
+import * as THREE from 'three';
 
 export default {
   data() {
     return {
-      scene: new THREE.Scene(),
-      renderer: new THREE.WebGLRenderer(),
+      scene: null,
+      renderer: null,
       camera: null,
       width: window.innerWidth,
       height: window.innerHeight,
@@ -77,40 +77,42 @@ export default {
       fragmentShader: null,
       text: null,
       mesh: null,
-      dummy: null
+      dummy: null,
     }
   },
   mounted() {
-    this.vertexShader = document.getElementById('vertex').textContent;
-    this.fragmentShader = document.getElementById('fragment').textContent;
-
-    this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setSize(this.width, this.height);
-    this.renderer.setClearColor(0x000010, 1);
-
-    this.container = document.getElementById("container");
-    this.width = this.container.offsetWidth;
-    this.height = this.container.offsetHeight;
-    this.container.appendChild( this.renderer.domElement );
-
-    this.camera = new THREE.PerspectiveCamera(
-      50,
-      window.innerWidth / window.innerHeight,
-      0.001,
-      1000
-    );
-    
-    this.camera.position.set(0, 0, 2);
-    this.dummy = new THREE.Object3D();
-
+    this.threeInit();
     this.loadFont();
     this.createParticles();
-
-
-
-
   },
   methods: {
+    threeInit() {
+      if(!!document) {
+        this.scene = new THREE.Scene();
+        this.renderer = new THREE.WebGLRenderer()
+        this.vertexShader = document.getElementById('vertex').textContent;
+        this.fragmentShader = document.getElementById('fragment').textContent;
+
+        this.renderer.setPixelRatio( window.devicePixelRatio );
+        this.renderer.setSize(this.width, this.height);
+        this.renderer.setClearColor(0x000010, 1);
+
+        this.container = document.getElementById("container");
+        this.width = this.container.offsetWidth;
+        this.height = this.container.offsetHeight;
+        this.container.appendChild( this.renderer.domElement );
+
+        this.camera = new THREE.PerspectiveCamera(
+          50,
+          window.innerWidth / window.innerHeight,
+          0.001,
+          1000
+        );
+        
+        this.camera.position.set(0, 0, 2);
+        this.dummy = new THREE.Object3D();
+      }
+    },
     createParticles2() {
       let geometry = new THREE.SphereBufferGeometry(0.01, 16, 16);
       // let material = new THREE.RawShaderMaterial({
@@ -193,7 +195,6 @@ export default {
       loader.load(
         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1116884/alegreya_sans_thin_regular.typeface.json",
         res => {
-          console.log('creating font with ', res)
           this.createText(res);
           this.render();
         }

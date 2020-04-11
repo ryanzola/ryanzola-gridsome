@@ -1,7 +1,7 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import Home from '~/layouts/Home.vue';
 
-export default function (Vue) {
+export default function (Vue, { head }) {
   Vue.component('Layout', DefaultLayout)
   Vue.component('Home', Home);
 }
