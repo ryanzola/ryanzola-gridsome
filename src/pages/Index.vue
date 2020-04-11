@@ -112,8 +112,52 @@ export default {
         );
         
         this.camera.position.set(0, 0, 2);
+
+        this.setupResize();
+
         this.dummy = new THREE.Object3D();
       }
+    },
+    resize() {
+      this.width = this.container.offsetWidth;
+      this.height = this.container.offsetHeight;
+      this.renderer.setSize(this.width, this.height);
+      this.camera.aspect = this.width / this.height;
+      
+      // image cover
+      this.imageAspect = 1;
+      let a1, a2;
+      
+      if (this.height / this.width > this.imageAspect) {
+        a1 = (this.width / this.height) * this.imageAspect;
+        a2 = 1;
+      } else {
+        a1 = 1;
+        a2 = (this.height / this.width) * this.imageAspect;
+      }
+      
+      this.material.uniforms.iResolution.value.x = this.width;
+      this.material.uniforms.iResolution.value.y = this.height;
+      this.material.uniforms.iResolution.value.z = a1;
+      this.material.uniforms.iResolution.value.w = a2;
+
+
+      
+      const dist = this.camera.position.z;
+      const height = 1;
+      
+      this.camera.fov = 2 * (180 / Math.PI) * Math.atan(height / (2 * dist));
+      
+      if (this.width / this.height > 1) {
+        this.plane.scale.x = this.camera.aspect;
+      } else {
+        this.plane.scale.y = 1 / this.camera.aspect;
+      }
+
+      this.camera.updateProjectionMatrix();
+    },
+    setupResize() {
+      window.addEventListener('resize', this.resize.bind(this), false);
     },
     createParticles2() {
       let geometry = new THREE.SphereBufferGeometry(0.01, 16, 16);
