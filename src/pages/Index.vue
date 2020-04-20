@@ -1,15 +1,9 @@
 <template>
   <Home>
+      <h1>Ryan Zola</h1>
     <div id="container"></div>
-    <div class="content">
-      <div class="links" ref="links">
-        <g-link to="/codepen">3D Animation</g-link>
-        <g-link to="/codepen">2D Animation</g-link>
-        <g-link to="/codepen">SVG Animation</g-link>
-        <g-link to="/codepen">Data Viz</g-link>
-      </div>
 
-    </div>
+ 
     <script id="vertex" type="x-shader/x-vertex">
       precision highp float;
 
@@ -44,13 +38,14 @@
       varying vec3 vPosition;
 
       uniform float time;
+      uniform float sineTime;
 
       void main() {
         vec4 color = vColor;
 
         color.r = 0.0;
-        color.g = 0.01;
-        color.b += (sin(  10.0 + time ) * 0.05) - 0.5;
+        color.g = 0.0;
+        color.b += (sin( 5.0 + time ) * 0.05) - 0.5;
 
         gl_FragColor = color;
       }
@@ -82,9 +77,9 @@ export default {
   },
   mounted() {
     this.threeInit();
-    this.loadFont();
     this.createParticles();
     this.resize();
+    this.render();
     
   },
   methods: {
@@ -93,7 +88,7 @@ export default {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
         this.scene = new THREE.Scene();
-        this.renderer = new THREE.WebGLRenderer()
+        this.renderer = new THREE.WebGLRenderer({ antialias: true })
         this.vertexShader = document.getElementById('vertex').textContent;
         this.fragmentShader = document.getElementById('fragment').textContent;
 
@@ -143,29 +138,11 @@ export default {
       const height = 1;
       
       this.camera.fov = 4 * (180 / Math.PI) * Math.atan(height / (2 * dist));
-      console.log(this.camera.fov)
 
       this.camera.updateProjectionMatrix();
     },
     setupResize() {
       window.addEventListener('resize', this.resize.bind(this), false);
-    },
-    createParticles2() {
-      let geometry = new THREE.SphereBufferGeometry(0.01, 16, 16);
-      // let material = new THREE.RawShaderMaterial({
-      //   fragmentShader: this.fragmentShader,
-      //   vertexShader: this.vertexShader, 
-      //   uniforms: {
-      //     time: { type: 'f', value: 1.0 },
-      //     sineTime: { type: 'f', value: 1.0 },
-      //   },
-      //   side: THREE.DoubleSide });
-      let material = new THREE.MeshBasicMaterial({ color: 0x000055 })
-
-      this.mesh = new THREE.InstancedMesh(geometry, material, this.instances);
-      this.mesh.instanceMatrix.setUsage( THREE.DynamicDrawUsage ); // will be updated every frame
-
-      this.scene.add(this.mesh);
     },
     createParticles() {
       var vector = new THREE.Vector4();
@@ -233,7 +210,7 @@ export default {
         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1116884/alegreya_sans_thin_regular.typeface.json",
         res => {
           this.createText(res);
-          this.render();
+          // this.render();
         }
       );
     },
@@ -256,18 +233,12 @@ export default {
       this.text = new THREE.Mesh(textGeo, textMat);
       this.text.position.y = (-textGeo.boundingBox.max.y / 2) + 0.058 ;
       this.text.position.x = (-textGeo.boundingBox.max.x / 2) - 0.01;
-      this.text.position.z = -3;
+      this.text.position.z = 1;
       this.scene.add(this.text);
 
 	  },
     render() {
       let time = performance.now() * 0.3;
-
-      // animate text
-      if(this.text.position.z < -0.32) {
-        this.text.position.z += 0.015;
-        this.text.material.opacity < 1 ? this.text.material.opacity += 0.005 : 1;
-      }
 
       // for create particles 1
       var object = this.scene.children[ 0 ];
@@ -277,38 +248,6 @@ export default {
 
       object.material.uniforms[ "time" ].value = time * 0.005;
       object.material.uniforms[ "sineTime" ].value = Math.sin( object.material.uniforms[ "time" ].value * 0.05 );
-      
-      // for create particles 2
-      // if(this.mesh) {
-			// 		this.mesh.rotation.x = Math.sin( time / 4 );
-			// 		this.mesh.rotation.y = Math.sin( time / 2 );
-
-			// 		var i = 0;
-			// 		var offset = ( 10 - 1 ) / 2;
-
-			// 		for ( var x = 0; x < 10; x ++ ) {
-
-			// 			for ( var y = 0; y < 10; y ++ ) {
-
-			// 				for ( var z = 0; z < 10; z ++ ) {
-
-			// 					this.dummy.position.set( offset - x, offset - y, offset - z );
-			// 					this.dummy.rotation.y = ( Math.sin( x / 4 + time ) + Math.sin( y / 4 + time ) + Math.sin( z / 4 + time ) );
-			// 					this.dummy.rotation.z = this.dummy.rotation.y * 2;
-
-			// 					this.dummy.updateMatrix();
-
-			// 					this.mesh.setMatrixAt( i ++, this.dummy.matrix );
-
-			// 				}
-
-			// 			}
-
-			// 		}
-
-			// 		this.mesh.instanceMatrix.needsUpdate = true;
-      // }
-
 
       requestAnimationFrame(this.render);
       this.renderer.render(this.scene, this.camera);
@@ -326,62 +265,26 @@ export default {
   left: 0;
 }
 
-canvas {
-  position: absolute;
-  min-height: 100vh;
-  width: 100%;
-  z-index: -1;
-}
-
-.header {
-    position: absolute;
-  top: 0;
-  left: 0;
-  height: 100px;
-  width: 100%;
-  border: 1px solid red;
-}
-
-.content {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.content a {
-  font-size: 1.2rem;
-  color: white;
-  text-decoration: none;
-  margin: auto 1rem;
-
-
-}
-
-.links {
-  opacity: 0;
-  transition: opacity 1000ms ease-in-out;
-  transition-delay: 500ms;
-}
-
-.content a:hover {
-  font-weight: bold;
-}
-
 h1 {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
   color: white;
-  font-size: 8rem;
   font-weight: 100;
-  /* opacity: 0; */
+  font-size: 20vw;
   text-align: center;
-  letter-spacing: 1.3px;
-  transition: opacity 2000ms ease-in-out;
-  pointer-events: none;
-  user-select: none;
+  transform-style: preserve-3d;
+  transform:  translate(-50%, -50%) perspective(1000px) translateZ(1000px);
+  opacity: 0;
+  animation: transZ 4000ms ease-in-out forwards;
+  will-change: transform;
 }
 
-.show {
-  opacity: 1;
+@keyframes transZ {
+  to {
+    transform: translate(-50%, -50%) perspective(1000px) translateZ(0px);
+    opacity: 1;
+  }
 }
 </style>
