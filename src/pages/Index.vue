@@ -258,8 +258,13 @@ export default {
 
 
 <style>
+canvas {
+  display: block;
+}
+
 .container {
   min-height: 100vh;
+  max-width: 1280px;
   position: relative;
   top: 0;
   left: 0;
@@ -267,13 +272,13 @@ export default {
 
 h1 {
   position: absolute;
-  width: 100%;
   top: 50%;
   left: 50%;
   color: white;
   font-weight: 100;
   font-size: 20vw;
   text-align: center;
+  white-space: nowrap;
   transform-style: preserve-3d;
   transform:  translate(-50%, -50%) perspective(1000px) translateZ(1000px);
   opacity: 0;
