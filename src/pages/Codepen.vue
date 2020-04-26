@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <h1>Welcome to my codepens :)</h1>
     <ul class="post-list">
       <li v-for="{ node } in $page.allWordPressCodepen.edges" :key="node.id">
         <Codepen :pen="node" />
