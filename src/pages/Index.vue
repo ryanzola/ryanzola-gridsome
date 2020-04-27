@@ -1,7 +1,6 @@
 <template>
   <Home>
       <h1>Ryan Zola</h1>
-      <g-link to="/codepen">view my portfolio</g-link>
     <div id="container"></div>
 
  
