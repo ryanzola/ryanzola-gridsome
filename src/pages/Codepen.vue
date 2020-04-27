@@ -5,6 +5,8 @@
         <Codepen :pen="node" />
       </li>
     </ul>
+
+
   </Layout>
 </template>
 
@@ -20,7 +22,10 @@ query Codepen ($page: Int) {
         }
         acf {
           codpenDescription
-          codepenUrl
+          codepenUrl,
+          comments,
+          views,
+          likes
         }
       }
     }
@@ -38,7 +43,16 @@ export default {
     Codepen
   },
   metaInfo: {
-    title: 'Welcome to my blog :)'
-  }
+    title: 'Codepen'
+  },
+  data() {
+    return {
+      pens: []
+    }
+  },
 }
 </script>
+
+<style scoped>
+
+</style>
