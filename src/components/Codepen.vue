@@ -30,6 +30,9 @@ export default {
       required: true
     }
   },
+  mounted() {
+    console.log(this.pen)
+  }
 }
 </script>
 
@@ -82,7 +85,7 @@ export default {
 }
 
 .pen__preview-image {
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
   margin-bottom: 0.25rem;
 }
 
@@ -137,5 +140,18 @@ svg#eye {
 
 .pen__footer button:hover svg#heart {
   fill: #f19994;
+}
+
+@media screen and (min-width: 599px) {
+.pen::after {
+  transform: scaleX(0.89) scaleY(0.9);
+}
+}
+
+@media screen and (min-width: 768px) {
+  .pen::after {
+    transform: scaleX(0.922) scaleY(0.91);
+
+  }
 }
 </style>

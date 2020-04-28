@@ -54,5 +54,21 @@ export default {
 </script>
 
 <style scoped>
+ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
 
+@media screen and (min-width: 599px) {
+  ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 </style>
