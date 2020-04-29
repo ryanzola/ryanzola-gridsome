@@ -1,5 +1,5 @@
 <template>
-  <Home>
+  <Layout>
       <h1>Ryan Zola</h1>
     <div id="container"></div>
 
@@ -50,15 +50,19 @@
         gl_FragColor = color;
       }
     </script>
-  </Home>
+  </Layout>
 </template>
 
 
 
 <script>
 import * as THREE from 'three';
+import Layout from '~/layouts/Home.vue'
 
 export default {
+  components: {
+    Layout
+  },
   data() {
     return {
       scene: null,

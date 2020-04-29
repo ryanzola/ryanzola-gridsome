@@ -5,8 +5,6 @@
         <Codepen :pen="node" />
       </li>
     </ul>
-
-
   </Layout>
 </template>
 
@@ -36,11 +34,13 @@ query Codepen ($page: Int) {
 <script>
 import { Pager } from 'gridsome'
 import Codepen from '~/components/Codepen.vue'
+import Layout from '~/layouts/Default.vue';
 
 export default {
   components: {
     Pager,
-    Codepen
+    Codepen,
+    Layout
   },
   metaInfo: {
     title: 'Codepen'

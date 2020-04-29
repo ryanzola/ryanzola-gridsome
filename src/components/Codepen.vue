@@ -30,9 +30,6 @@ export default {
       required: true
     }
   },
-  mounted() {
-    console.log(this.pen)
-  }
 }
 </script>
 
