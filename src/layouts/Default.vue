@@ -53,7 +53,6 @@
 body {
   font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   background-color: #131417;
-  padding-top: 60px;
 }
 
 img {
@@ -73,6 +72,7 @@ nav[role="navigation"] a {
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 60px;
 }
 
 .header {
