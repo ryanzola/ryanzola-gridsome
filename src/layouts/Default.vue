@@ -119,7 +119,7 @@ nav[role="navigation"] a {
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 .header {
@@ -177,6 +177,7 @@ nav[role="navigation"] a {
 }
 .post-list {
   list-style: none;
+  margin: 0;
   padding-left: 0;
 }
 
