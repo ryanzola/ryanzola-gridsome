@@ -60,15 +60,33 @@ ul {
   grid-gap: 1rem;
 }
 
-@media screen and (min-width: 599px) {
+/* @media screen and (min-width: 599px) {
   ul {
     grid-template-columns: repeat(2, 1fr);
   }
+} */
+
+@media screen and (min-width: 932px) {
+  ul {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 2fr repeat(2, auto)
+  }
+
+  li:first-child {
+    grid-row: 1 / 2;
+    grid-column: 1 / 3;
+  }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1148px) {
   ul {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 2fr repeat(2, auto)
+  }
+
+  li:first-child {
+    grid-row: 1 / 2;
+    grid-column: 1 / 4;
   }
 }
 </style>

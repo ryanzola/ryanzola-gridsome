@@ -47,7 +47,7 @@ export default {
 .pen::after {
   position: absolute;
   content: '';
-  top: 5.4px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -57,33 +57,38 @@ export default {
   overflow: hidden;
   border-radius: 10px;
   transform-origin: center;
-  transform: scale(0.944);
-  will-change: transform;
-  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+  will-change: top, right, left;
 }
 
-.pen:hover::after {
-  top: 0;
-  transform: scale(1);
-  transition: transform 0.3s ease, top 0.3s ease-in-out;
-}
+
+
+
 
 .pen__title {
   color: white;
   margin-top: 0;
   margin-bottom: 0.25rem;
-  padding-left: 1rem;
   font-size: 17px;
+  font-weight: 900;
   transition: padding 0.3s ease-in-out;
 }
+
+
 
 .pen:hover .pen__title {
   padding-left: 0;
 }
 
 .pen__preview-image {
+  width: 100%;
   border-radius: 10px 10px 0 0;
   margin-bottom: 0.25rem;
+  transition: border-radius 0.3s ease-in-out;
+}
+
+.pen:hover .pen__preview-image {
+  padding-left: 0;
+  border-radius: 8px 8px 0 0;
 }
 
 .pen a {
@@ -91,7 +96,6 @@ export default {
 }
 
 .pen__footer {
-  padding-left: 1rem;
   transition: padding 0.3s ease-in-out;
 }
 
@@ -139,16 +143,39 @@ svg#eye {
   fill: #f19994;
 }
 
-@media screen and (min-width: 599px) {
-.pen::after {
-  transform: scaleX(0.89) scaleY(0.9);
-}
-}
-
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 932px) {
   .pen::after {
-    transform: scaleX(0.922) scaleY(0.91);
-
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    transition: 
+    top 0.3s ease-in-out,
+    left 0.3s ease-in-out,
+    right 0.3s ease-in-out;
   }
+
+.pen:hover::after {
+    top: 0;
+    left: 0;
+    right: 0;
+  /* transform: scale(1); */
+  transition: 
+    top 0.3s ease-in-out,
+    left 0.3s ease-in-out,
+    right 0.3s ease-in-out;
+}
+
+  .pen__title {
+    padding-left: 1rem;
+  }
+
+  .pen__footer {
+    padding-left: 1rem;
+  }
+}
+
+@media screen and (min-width: 830px) {
+
+
 }
 </style>
