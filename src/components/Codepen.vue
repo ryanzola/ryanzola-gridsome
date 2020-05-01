@@ -33,36 +33,52 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .pen {
   position: relative;
-  /* border: 1px solid #1f2229; */
   border-radius: 0.25rem;
   padding: 1rem;
   cursor: pointer;
+
+  &::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #1f2229;
+    z-index: -1;
+    contain: strict;
+    overflow: hidden;
+    border-radius: 10px;
+    transform-origin: center;
+    will-change: top, right, left;
+  }
+
+  &:hover .pen__title {
+    padding-left: 0;
+  }
+
+  &:hover .pen__preview-image {
+    padding-left: 0;
+    border-radius: 8px 8px 0 0;
+  }
+
+  &:hover .pen__footer {
+    padding-left: 0;
+  }
 }
 
-
-
-.pen::after {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #1f2229;
-  z-index: -1;
-  contain: strict;
-  overflow: hidden;
-  border-radius: 10px;
-  transform-origin: center;
-  will-change: top, right, left;
+.pen:hover::after {
+    top: 0;
+    left: 0;
+    right: 0;
+  transition: 
+    top 0.3s ease-in-out,
+    left 0.3s ease-in-out,
+    right 0.3s ease-in-out;
 }
-
-
-
-
 
 .pen__title {
   color: white;
@@ -73,22 +89,11 @@ export default {
   transition: padding 0.3s ease-in-out;
 }
 
-
-
-.pen:hover .pen__title {
-  padding-left: 0;
-}
-
 .pen__preview-image {
   width: 100%;
   border-radius: 10px 10px 0 0;
   margin-bottom: 0.25rem;
   transition: border-radius 0.3s ease-in-out;
-}
-
-.pen:hover .pen__preview-image {
-  padding-left: 0;
-  border-radius: 8px 8px 0 0;
 }
 
 .pen a {
@@ -99,23 +104,19 @@ export default {
   transition: padding 0.3s ease-in-out;
 }
 
-.pen:hover .pen__footer {
-  padding-left: 0;
-}
-
 .pen__footer button {
-  background: rgba(0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.9);
   border: none;
   border-radius: 4px;
   margin-right: 5px;
   padding: 0.25rem 0.5rem 0.2rem;
   color: white;
   cursor: pointer;
-}
 
-.pen__footer button:hover {
-  background: white;
-  color: rgba(0, 0, 0.9);
+  &:hover {
+    background: white;
+    color: rgba(0, 0, 0, 0.9);
+  }
 }
 
 .pen__footer button svg {
@@ -154,17 +155,6 @@ svg#eye {
     right 0.3s ease-in-out;
   }
 
-.pen:hover::after {
-    top: 0;
-    left: 0;
-    right: 0;
-  /* transform: scale(1); */
-  transition: 
-    top 0.3s ease-in-out,
-    left 0.3s ease-in-out,
-    right 0.3s ease-in-out;
-}
-
   .pen__title {
     padding-left: 1rem;
   }
@@ -172,10 +162,5 @@ svg#eye {
   .pen__footer {
     padding-left: 1rem;
   }
-}
-
-@media screen and (min-width: 830px) {
-
-
 }
 </style>

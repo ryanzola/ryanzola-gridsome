@@ -14,6 +14,8 @@
     "three": "^0.115.0"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.0.3"
   }
 }

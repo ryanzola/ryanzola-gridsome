@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100&display=swap');
 
 html
@@ -24,11 +24,8 @@ html
   margin: 0;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 body {
+  margin: 0;
   padding: 0;
 }
 </style>

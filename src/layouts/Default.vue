@@ -89,15 +89,42 @@
         </svg>
       </g-link>
       </div>
+      <h2>PORTFOLIO</h2>
+      <ul class="links">
+        <li><g-link class="nav__link" to="/">Home</g-link></li>
+        <li><g-link class="nav__link" to="/about/">About</g-link></li>
+        <li><a class="nav__link" href="https://github.com/ryanzola">Github</a></li>
+        
+        
+        
+      </ul>
     </nav>
     <slot/>
   </div>
 </template>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap');
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
+html
+{
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+*, *:before, *:after
+{
+  box-sizing: border-box;
+  margin: 0;
+}
 
 body {
+  margin: 0;
   font-family: "Lato", -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   background-color: #131417;
 }
@@ -117,9 +144,7 @@ nav[role="navigation"] a {
 .layout {
   max-width: 1280px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 70px;
+  padding: 70px 20px 40px 20px;
 }
 
 .header {
@@ -143,21 +168,67 @@ nav[role="navigation"] a {
   left: 0;
   bottom: 0;
   width: 188px;
+  padding: 10px 0;
   background-color: #1e1f26;
   box-shadow: 2px 0 5px rgba(0,0,0,0.2);
   z-index: 9999;
   display: none;
+  box-sizing: border-box;
 }
 
 .navigation .logo {
-  height: 65px;
   display: flex;
   justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.navigation h2 {
+    color: #b7bbc8;
+    position: relative;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    padding: 0 10px;
+    font-size: .8rem;
+    font-weight: 400;
+}
+
+.navigation .links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation .links li {
+  display: block;
+  margin: 0;
+  font-weight: 900;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: black
+  }
+}
+
+.navigation .links .nav__link {
+    font-weight: 700;
+    padding: .35rem 10px;
+    margin: 0;
+    color: #fff;
+    display: block;
+    width: 100%;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden;
+    transition: .2s ease;
+    line-height: 1;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 830px) {
   .layout {
-    padding-left: 200px;
+    padding-left: 210px;
     padding-top: 10px;
   }
 
@@ -182,15 +253,15 @@ nav[role="navigation"] a {
 }
 
 #home-link {
-  margin: auto;
+  margin: 0 auto;
   position: relative;
 }
 
-#home-link::after {
+.navigation h2::after {
   position: absolute;
   width: 170px;
   bottom: -0.5rem;
-  left: 0;
+  left: 10px;
   content: "";
   height: 3px;
   border-radius: 10px;
