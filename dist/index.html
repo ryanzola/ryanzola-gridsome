@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Ryan Zola - Ryan Zola</title><meta name="gridsome:hash" content="52c2e4c6ad15d5d961a387dd7b29462088b98f74"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.13"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="My portfolio website"><link rel="preload" href="/assets/js/app.3d879f22.js" as="script"><link rel="preload" href="/assets/js/page--src--pages--index-vue.4b694b69.js" as="script"><link rel="prefetch" href="/assets/css/0.styles.3d4cd38f.css"><link rel="prefetch" href="/assets/js/page--node-modules--gridsome--app--pages--404-vue.4a598350.js"><link rel="prefetch" href="/assets/js/page--src--pages--about-vue.5229b702.js"><link rel="prefetch" href="/assets/js/page--src--pages--codepen-vue.d7269c2d.js"><link rel="prefetch" href="/assets/js/vendors~page--src--pages--index-vue.361e722c.js"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+  </head>
+  <body >
+    <div data-server-rendered="true" id="app" data-v-6c954648><h1 data-v-6c954648>Ryan Zola</h1><div id="container" data-v-6c954648></div><script id="vertex" type="x-shader/x-vertex" data-v-6c954648>
+    precision highp float;
+
+    attribute vec3 offset;
+    attribute vec4 color;
+    attribute vec3 position;
+    attribute vec4 orientationStart;
+    attribute vec4 orientationEnd;
+
+    uniform mat4 modelViewMatrix;
+    uniform mat4 projectionMatrix;
+    uniform float sineTime;
+
+    varying vec4 vColor;
+    varying vec3 vPosition;
+
+    void main() {
+      vColor = color;
+      //vPosition = offset * max( abs( sineTime * 2.0 + 1.0 ), 0.5 ) + position;
+      vPosition = offset * max( abs( 2.0 + 1.0 ), 0.5 ) + position;
+      vec4 orientation = normalize( mix( orientationStart, orientationEnd, sineTime ) );
+      vec3 vcV = cross( orientation.xyz, vPosition );
+      vPosition = vcV * ( 2.0 * orientation.w ) + ( cross( orientation.xyz, vcV ) * 2.0 + vPosition );
+
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
+    }
+  </script><script id="fragment" type="x-shader/x-fragment" data-v-6c954648>
+    precision highp float;
+    varying vec4 vColor;
+    varying vec3 vPosition;
+
+    uniform float time;
+    uniform float sineTime;
+
+    void main() {
+      vec4 color = vColor;
+
+      color.r = 0.0;
+      color.g = 0.0;
+      color.b += (sin( 5.0 + time ) * 0.05) - 0.5;
+
+      gl_FragColor = color;
+    }
+  </script></div>
+    <script>window.__INITIAL_STATE__={"data":null,"context":{}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script><script src="/assets/js/app.3d879f22.js" defer></script><script src="/assets/js/page--src--pages--index-vue.4b694b69.js" defer></script>
+  </body>
+</html>
