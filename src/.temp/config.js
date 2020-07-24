@@ -1,8 +1,0 @@
-export default {
-  "trailingSlash": true,
-  "pathPrefix": "",
-  "titleTemplate": "%s - Ryan Zola",
-  "siteUrl": "",
-  "version": "0.7.13",
-  "catchLinks": true
-}
